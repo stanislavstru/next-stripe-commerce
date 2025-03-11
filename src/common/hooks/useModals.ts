@@ -5,6 +5,7 @@ import {
   selectModals,
   toggleFeedbackModal as toggleFeedbackModalNative,
   togglePreorderModal as togglePreorderModalNative,
+  toggleCallbackModal as toggleCallbackModalNative,
 } from "../redux/reducers/modals";
 import { ModalsReducer } from "../redux/reducers/modals";
 
@@ -20,5 +21,19 @@ export const useModals = () => {
     dispatch(togglePreorderModalNative(payload));
   };
 
-  return { modals, toggleFeedbackModal, togglePreorderModal };
+  const toggleCallbackModal = (routeToSuscriptionPage: boolean = true) => {
+    dispatch(
+      toggleCallbackModalNative({
+        show: !modals.callbackModal.show,
+        data: { routeToSuscriptionPage },
+      })
+    );
+  };
+
+  return {
+    modals,
+    toggleFeedbackModal,
+    togglePreorderModal,
+    toggleCallbackModal,
+  };
 };

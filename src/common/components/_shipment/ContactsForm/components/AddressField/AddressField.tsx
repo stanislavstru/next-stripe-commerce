@@ -100,12 +100,31 @@ const AddressField: React.FC<AddressFieldProps> = ({
     geocoder.geocode(request, function (results, status) {
       if (status === google.maps.GeocoderStatus.OK && Array.isArray(results)) {
         const addressComponents = results[0].address_components;
-        let route, subpremise, streetNumber, country, zip, state, city;
+
+        let route,
+          neighborhood,
+          sublocality,
+          subpremise,
+          streetNumber,
+          country,
+          zip,
+          state,
+          city;
         let countryLongName = null;
+
+        console.log("addressComponents", addressComponents);
 
         addressComponents.forEach((component) => {
           if (component.types.includes("route")) {
             route = component.long_name;
+          }
+
+          if (component.types.includes("neighborhood")) {
+            neighborhood = component.long_name;
+          }
+
+          if (component.types.includes("sublocality")) {
+            sublocality = component.long_name;
           }
 
           if (component.types.includes("subpremise")) {
@@ -164,6 +183,8 @@ const AddressField: React.FC<AddressFieldProps> = ({
           ...values,
           address1: `${streetNumber ? streetNumber + " " : ""}${
             route ? route + " " : ""
+          }${neighborhood ? ", " + neighborhood : ""}${
+            sublocality ? ", " + sublocality : ""
           }`,
           address2: subpremise ?? "",
           country: country ?? "",

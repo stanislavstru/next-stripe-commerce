@@ -15,12 +15,19 @@ import { useCart } from "@/common/hooks/useCart";
 import type { ShipmentMethodsCalculateModalProps } from "@/common/components/_shipment/ShipmentMethodsCalculateModal/ShipmentMethodsCalculateModal";
 import { toast } from "react-toastify";
 import { CustomerContactDto } from "@/common/types/api/types-from-swagger";
-import { USA_States, CANADA_States } from "@/common/constants/location";
+import {
+  USA_States,
+  CANADA_States,
+  MEXICO_States,
+  SPANISH_States,
+  GERMANY_States,
+} from "@/common/constants/location";
 import { AVAILABLE_COUNTRY_CODES } from "@/common/config/main-client-config";
 import CountryUnavailableModal, {
   CountryUnavailableModalType,
 } from "./components/CountryUnavailableModal/CountryUnavailableModal";
 import { usePathname } from "next/navigation";
+import { useConfig } from "@/common/hooks/useConfig";
 
 const optionsStates = (countryCode: string) => {
   switch (countryCode) {
@@ -29,6 +36,15 @@ const optionsStates = (countryCode: string) => {
 
     case "CA":
       return CANADA_States;
+
+    case "MX":
+      return MEXICO_States;
+
+    case "ES":
+      return SPANISH_States;
+
+    case "DE":
+      return GERMANY_States;
 
     default:
       return [];
@@ -74,6 +90,7 @@ const ContactsForm: React.FC<ContactsFormProps> = ({
   setCustomerContact,
   setShipmentCalculatorDataModal,
 }) => {
+  const { config } = useConfig();
   const [unavailableCountryModal, setUnavailableCountryModal] =
     useState<CountryUnavailableModalType>({
       show: false,
@@ -117,13 +134,16 @@ const ContactsForm: React.FC<ContactsFormProps> = ({
         });
       } else {
         toast.error(
-          "There are no shipping methods available for this address."
+          "There are no shipping methods available for this address or we cannot process the items in your cart as a single order. Please split your cart into separate orders."
         );
       }
     } catch (error) {
       console.log(error);
       toast.error(
-        "There is a problem with the shipping calculator. Please let us know about this problem."
+        `There is a problem with the shipping calculator. Please let us know about this problem.` +
+          config?.business_email
+          ? ` Our email <a href='mailto:${config?.business_email}'>${config?.business_email}</a>`
+          : ""
       );
     }
   };
@@ -214,6 +234,12 @@ const ContactsForm: React.FC<ContactsFormProps> = ({
                   <FormField
                     label="Address 2"
                     name="address2"
+                    helperText={
+                      <div className="wco-text-black">
+                        Enter your apartment number to see available UPS
+                        delivery options.
+                      </div>
+                    }
                     placeholder="Apartment, suite, etc. (optional)"
                     component={Input}
                   />

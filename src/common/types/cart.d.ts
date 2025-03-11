@@ -9,6 +9,7 @@ declare type ClientCartInfo = {
     title: ProductsEntity["title"];
     price: ProductsEntity["price"];
     quantity: ProductsEntity["quantity"];
+    is_active: boolean;
   }[];
   totalPrice: string;
   totalWeight: {

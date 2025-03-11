@@ -26,8 +26,6 @@ const ImagesGallery: React.FC<ImagesGalleryProps> = ({ title, images }) => {
     setZoomPosition({ x, y });
   };
 
-  console.log("showZoom", showZoom);
-
   return (
     <>
       {activeImage && (

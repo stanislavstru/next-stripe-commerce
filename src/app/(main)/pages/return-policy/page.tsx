@@ -12,7 +12,15 @@ export default async function Page() {
   return (
     <MainLayout>
       <SinglePageLayout title="Return Policy">
-        <div className="md:wco-w-[600px] wco-mx-auto">Area for text</div>
+        <div className="md:wco-w-[600px] wco-mx-auto">
+          Returns for refunds are accepted only within 15 days of purchase. All
+          returned items must be in clean, unused condition and include their
+          original packaging. Customers are responsible for covering all return
+          shipping costs and associated fees. Any shipping damages must be
+          reported directly to the courier at the time of delivery, and damage
+          claims will only be considered within three days of receiving the
+          shipment.
+        </div>
       </SinglePageLayout>
     </MainLayout>
   );

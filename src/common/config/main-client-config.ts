@@ -11,4 +11,16 @@ export const AVAILABLE_COUNTRY_CODES = [
     label: "Canada",
     value: "CA",
   },
+  {
+    label: "Mexico",
+    value: "MX",
+  },
+  {
+    label: "Spain",
+    value: "ES",
+  },
+  {
+    label: "Germany",
+    value: "DE",
+  },
 ];

@@ -14,8 +14,8 @@ const ShipmentCard: FC<ShipmentCardProps> = ({ rate, active, onClick }) => {
   return (
     <div
       className={classNames(
-        "wco-flex wco-gap-5 wco-border-2 wco-p-5 wco-transition-all",
-        active ? "wco-border-black wco-bg-gray-200" : "wco-border-transparent",
+        "wco-flex wco-gap-5 wco-border-2 wco-p-5 wco-transition-all wco-rounded-sm ",
+        active ? "wco-border-black wco-bg-gray-200" : "wco-border-gray-200",
         onClick && "wco-cursor-pointer"
       )}
       onClick={() => {

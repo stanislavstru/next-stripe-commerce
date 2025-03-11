@@ -22,6 +22,12 @@ export type ModalsReducer = {
         }>)
       | null;
   };
+  callbackModal: {
+    show: boolean;
+    data: {
+      routeToSuscriptionPage: boolean;
+    };
+  };
 };
 
 const initialStateModals: ModalsReducer = {
@@ -32,6 +38,10 @@ const initialStateModals: ModalsReducer = {
   preorderModal: {
     show: false,
     data: null,
+  },
+  callbackModal: {
+    show: false,
+    data: { routeToSuscriptionPage: true },
   },
 };
 
@@ -45,10 +55,14 @@ export const modalsSlice = createSlice({
     togglePreorderModal: (state, action) => {
       state.preorderModal = { ...state.preorderModal, ...action.payload };
     },
+    toggleCallbackModal: (state, action) => {
+      state.callbackModal = { ...state.callbackModal, ...action.payload };
+    },
   },
 });
 
-export const { toggleFeedbackModal, togglePreorderModal } = modalsSlice.actions;
+export const { toggleFeedbackModal, togglePreorderModal, toggleCallbackModal } =
+  modalsSlice.actions;
 
 export const selectModals = (state: AppState) => state.modals;
 

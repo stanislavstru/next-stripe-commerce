@@ -12,7 +12,10 @@ export default async function Page() {
   return (
     <MainLayout>
       <SinglePageLayout title="Shipping policy">
-        <div className="md:wco-w-[600px] wco-mx-auto">Area for text</div>
+        <div className="md:wco-w-[600px] wco-mx-auto">
+          We deliver products across the USA and Canada via USPS. All orders are
+          shipped within 3-5 business days.
+        </div>
       </SinglePageLayout>
     </MainLayout>
   );

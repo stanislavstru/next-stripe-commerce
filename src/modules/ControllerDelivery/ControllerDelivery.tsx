@@ -53,16 +53,18 @@ const ControllerDelivery = () => {
 
       const preparedBody = {
         customerContact,
-        lineItems: cart.map((item) => ({
-          price_data: {
-            product_data: {
-              name: item.title,
+        lineItems: cart
+          .filter((item) => item.is_active)
+          .map((item) => ({
+            price_data: {
+              product_data: {
+                name: item.title,
+              },
+              unit_amount: item.price * 100,
             },
-            unit_amount: item.price * 100,
-          },
-          quantity: item.quantity,
-          product_id: item.id,
-        })),
+            quantity: item.quantity,
+            product_id: item.id,
+          })),
         shippingDetails: preparedShipmentData.shippingDetails,
         shippingOptions: [
           {

@@ -3,16 +3,16 @@
 import { useProducts } from "@/common/hooks/useProducts";
 import ProductCard from "@/common/components/ProductCard";
 import { useProductCategories } from "@/common/hooks/useProductCategories";
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { INTERNAL_NAMES } from "@/common/config/main-client-config";
+import BannerMK5 from "@/common/components/_banner/BannerMK5";
 
 const ProductsGallery = () => {
   const { activeCategoryId } = useProductCategories();
   const { filteredProducts } = useProducts({ activeCategoryId });
-
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -38,14 +38,20 @@ const ProductsGallery = () => {
   return (
     <>
       <div className="wco-w-full wco-grid wco-grid-cols-12 wco-gap-4">
-        {filteredProducts.map((product) => (
-          <div
-            className="wco-col-span-12 sm:wco-col-span-6 lg:wco-col-span-3"
-            key={product.id}
-          >
-            <ProductCard product={product} />
-          </div>
-        ))}
+        {filteredProducts.map((product, key) => {
+          return (
+            <Fragment key={key}>
+              {key === 1 && (
+                <div className="wco-col-span-12 sm:wco-col-span-6">
+                  <BannerMK5 />
+                </div>
+              )}
+              <div className="wco-col-span-12 sm:wco-col-span-6 lg:wco-col-span-3">
+                <ProductCard product={product} />
+              </div>
+            </Fragment>
+          );
+        })}
       </div>
     </>
   );

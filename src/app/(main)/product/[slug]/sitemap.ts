@@ -4,6 +4,9 @@ import { getProducts } from "@/common/actions/products";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const products = await getProducts();
 
+  console.log("@@@@@@");
+  console.log(products);
+
   if (!products) return [];
 
   return products.map((product) => ({
