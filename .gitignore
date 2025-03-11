@@ -13,8 +13,7 @@
 /coverage
 
 # public
-/public/og.jpg
-/public/icon.svg
+/public/*
 
 # favicon 
 /src/app/favicon.ico
